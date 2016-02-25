@@ -1,0 +1,23 @@
+{
+  "name": "search",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Andy Hohorst <Andy.Hohorst@decisiveinc.net>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "bootstrap": "^3.3.6",
+    "handlebars": "^4.0.5"
+  }
+}

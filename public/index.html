@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<link rel="stylesheet" href="bower/bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/search.css" />
+	</head>
+	<body>
+		
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">The Search</a>
+				</div>
+				
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><a data-field="username" href="/logout"></a></li>
+					</ul>
+				</div>
+				
+			</div>
+		</nav>
+		
+		<div class="container" id="content"></div>
+		
+		<script type="text/x-handlebars-template" id="loginTemplate">
+			<div id='loginPanel' class="container">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h1 class="panel-title">Login / Register</h1>
+					</div>
+					<div class="panel-body">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-6">
+									<fieldset id="login-form">
+										<legend>Login</legend>
+											<p class="error" style="display:none;"></p>
+											<div class="input-group">
+												<div class="input-group-addon">Email</div>
+												<input type='text' name="email" class="form-control" aria-label="Email" />
+											</div>
+											<div class="input-group">
+												<div class="input-group-addon">Password</div>
+												<input type='text' name="password" class="form-control" aria-label="Username" />
+											</div>
+											<input type="button" value="Login" onClick="Search.api.login();"/>
+									</fieldset>
+								</div>
+								<div class="col-md-6">
+									<fieldset id="register-form">
+										<legend>Register</legend>
+											<div class="input-group">
+												<div class="input-group-addon">Name</div>
+												<input type='text' name="name" class="form-control" aria-label="Name" />
+											</div>
+											<div class="input-group">
+												<div class="input-group-addon">Email</div>
+												<input type='text' name="email" class="form-control" aria-label="Email" />
+											</div>
+											<div class="input-group">
+												<div class="input-group-addon">Password</div>
+												<input type='text' name="password" class="form-control" aria-label="Username" />
+											</div>
+											<input type="button" value="Register" onClick="Search.api.register();"/>
+									</fieldset>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</script>
+	
+	
+		<script type="text/javascript" src="bower/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="bower/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="bower/handlebars/handlebars.min.js"></script>
+		<script type="text/javascript" src="js/search.js"></script>
+	</body>
+</html>

@@ -1,0 +1,16 @@
+<NotepadPlus>
+    <Project name="Search">
+        <Folder name="public">
+            <Folder name="css">
+                <File name="public\css\search.css" />
+            </Folder>
+            <Folder name="js">
+                <File name="public\js\search.js" />
+            </Folder>
+            <File name="public\index.html" />
+        </Folder>
+        <File name="app.js" />
+        <File name="bower.json" />
+        <File name="package.json" />
+    </Project>
+</NotepadPlus>
