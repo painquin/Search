@@ -1,0 +1,33 @@
+users
+
+games
+	owner
+	time started
+	current turn
+
+planet
+	owner
+	game
+	html
+	coordinates
+	
+	personnel
+		turn hired
+		turn fired
+		name
+		position
+		html
+		
+	turns
+		budget
+		signal
+			level
+			content
+			target
+			
+		messages
+			direction
+			subject
+			sender - only from DMs
+			html
+			type - icons, etc

@@ -9,6 +9,8 @@ var mongo = require("mongodb"),
 var assert = require("assert");
 var cookieParser = require("cookie-parser");
 
+const ST_PREGAME = 0, ST_RUNNING = 1, ST_POSTGAME = 2;
+
 
 var db;
 
@@ -36,7 +38,7 @@ app.all("*", function(req, res, next)
 {
 	if (req.signedCookies.session)
 	{
-		db.collection("users").find({_id:new ObjectId(req.signedCookies.session.user)}).each(function(err, user)
+		db.collection("users").find({_id:new ObjectId(req.signedCookies.session.user)}, { password: 0 }).each(function(err, user)
 		{
 			if (user)
 			{
@@ -86,7 +88,7 @@ app.post("/api/login", function(req, res)
 
 app.post("/api/register", function(req, res)
 {
-	// validate not already in system
+	// TODO validate not already in system
 	var users = db.collection("users");
 	users.insertOne({
 		email: req.body.email,
@@ -125,8 +127,61 @@ app.get("/api/status", function(req, res)
 	}
 	else
 	{
-		res.json({ });
+		res.json({ Result: "Error", Message: "Not logged in." });
 	}
+});
+
+app.post("/api/game/create", function(req, res)
+{
+	if (req.user)
+	{
+		// TODO validate
+		
+		var game = {
+			title: req.body.title,
+			owner: req.user._id,
+			create: new Date(),
+			state: ST_PREGAME
+		};
+		
+		db.collection("games").insertOne(game, function(err, r)
+		{
+			res.json({ Result: "Success" });
+		});
+	}
+	else
+	{
+		res.json({ Result: "Error", Message: "Not logged in." });
+	}
+});
+
+app.get("/api/game/list", function(req, res)
+{
+	var games = [];
+	db.collection("games").find({ $or: [ {state: ST_PREGAME}, {state: ST_RUNNING}] }, { title: 1, create: 1, state: 1 }).each(function(err, game)
+	{
+		if (game)
+		{
+			games[games.length] = game;
+		}
+		else
+		{
+			res.json(games);
+		}
+	});
+});
+
+app.get("/api/game/info/:game_id", function(req, res)
+{
+	db.collection("games").find({ _id: new ObjectId(req.params.game_id)}).each(function(err, game)
+	{
+		if (game)
+		{
+			res.json({ Result: "Success", game: game });
+			return false;
+		}
+		res.json({ Result: "Error", Message: "Invalid Id" });
+	});
 });
 
 app.listen(3000, function()
