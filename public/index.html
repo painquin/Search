@@ -99,7 +99,7 @@
 						<div class="input-group">
 							<input type="text" id="new-game-title" class="form-control" placeholder="My Game's Title" aria-label="New Game Title" />
 							<span class="input-group-btn">
-								<input class="btn btn-default" type="submit" onClick="Search.api.createGame($('#new-game-title').val()); return false;" value="Create New Game"/>
+								<input class="btn btn-default" type="submit" onClick="$(this).attr('disabled','disabled');Search.api.createGame($('#new-game-title').val()); return false;" value="Create New Game"/>
 							</span>
 						</div>
 						</form>
