@@ -166,7 +166,7 @@ app.get("/api/game/list", function(req, res)
 		}
 		else
 		{
-			res.json(games);
+			res.json( {Result: "Success", games: games });
 		}
 	});
 });

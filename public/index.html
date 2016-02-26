@@ -22,6 +22,7 @@
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li><a data-field="username" href="/logout"></a></li>
+						<li><a href="#" onClick="Search.showGames(); return false;">Games</a></li>
 					</ul>
 				</div>
 				
@@ -79,6 +80,34 @@
 			</div>
 		</script>
 	
+		<script type="text/x-handlebars-template" id="gamelistTemplate">
+			<div id="gamelistPanel" class="container">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h1 class="panel-title">Available Games</h1>
+					</div>
+					
+					<div class="panel-body">
+						<ul class="container">
+							{{#each games}}
+								<li>{{title}}</li>
+							{{/each}}
+						</ul>
+						<hr />
+						<h4>Create a new game</h3>
+						<form>
+						<div class="input-group">
+							<input type="text" id="new-game-title" class="form-control" placeholder="My Game's Title" aria-label="New Game Title" />
+							<span class="input-group-btn">
+								<input class="btn btn-default" type="submit" onClick="Search.api.createGame($('#new-game-title').val()); return false;" value="Create New Game"/>
+							</span>
+						</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</script>
 	
 		<script type="text/javascript" src="bower/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript" src="bower/bootstrap/dist/js/bootstrap.min.js"></script>

@@ -12,6 +12,26 @@ var Search = {
 	{
 		$("#content").html("");
 	},
+	
+	showGames: function()
+	{
+		$.get("/api/game/list",
+			{},
+			function(res)
+			{
+				if (res.Result == "Success")
+				{
+					$("#content").html(Search.templates.gamelistTemplate(res));
+				}
+				else
+				{
+					// waaat
+				}
+			},
+			"json"
+		);
+	},
+	
 	setUserInfo: function(user)
 	{
 		$("*[data-field=username]").text(user.name);
@@ -64,6 +84,25 @@ var Search = {
 				},
 				"json"
 			);
+		},
+		
+		createGame: function(title)
+		{
+			$.post("/api/game/create",
+				{ title: title },
+				function(res)
+				{
+					if (res.Result == "Success")
+					{
+						Search.showGames();
+					}
+					else
+					{
+						// TODO error
+					}
+				},
+				"json"
+			);
 		}
 	}
 };
@@ -75,6 +114,7 @@ $(function()
 	$("script[type*=handlebars]").each(function(idx,tpl)
 	{
 		Search.templates[tpl.id] = Handlebars.compile($(tpl).html());
+		$(tpl).remove(); // free up memory, simplify DOM
 	});
 
 
