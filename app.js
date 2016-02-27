@@ -184,6 +184,23 @@ app.get("/api/game/info/:game_id", function(req, res)
 	});
 });
 
+app.post("/api/game/join", function(req, res)
+{
+	// todo: validate
+	var game = req.body.game;
+	db.collection("planets").insertOne({
+		game: new ObjectId(game),
+		user: new ObjectId(req.user._id),
+		html: "<p>A planet run by " + req.user.name + ".</p>",
+		coordinates: { x: 3, y: 2, z: 1 }, // TODO randomize
+		personnel: [],
+		turns: [] // TODO prefill some introductory messages
+	}, function(err, r)
+	{
+		res.json({ Result: "Success" });
+	});
+});
+
 app.listen(3000, function()
 {
 	console.log("Server ready.");
