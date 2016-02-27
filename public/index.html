@@ -43,21 +43,24 @@
 								<div class="col-md-6">
 									<fieldset id="login-form">
 										<legend>Login</legend>
-											<p class="error" style="display:none;"></p>
-											<div class="input-group">
-												<div class="input-group-addon">Email</div>
-												<input type='text' name="email" class="form-control" aria-label="Email" />
-											</div>
-											<div class="input-group">
-												<div class="input-group-addon">Password</div>
-												<input type='text' name="password" class="form-control" aria-label="Username" />
-											</div>
-											<input type="button" value="Login" onClick="Search.api.login();"/>
+											<form>
+												<p class="error" style="display:none;"></p>
+												<div class="input-group">
+													<div class="input-group-addon">Email</div>
+													<input type='text' name="email" class="form-control" aria-label="Email" />
+												</div>
+												<div class="input-group">
+													<div class="input-group-addon">Password</div>
+													<input type='text' name="password" class="form-control" aria-label="Username" />
+												</div>
+												<input type="submit" value="Login" onClick="$(this).attr('disabled','disabled'); Search.api.login(); return false;"/>
+											</form>
 									</fieldset>
 								</div>
 								<div class="col-md-6">
 									<fieldset id="register-form">
 										<legend>Register</legend>
+										<form>
 											<div class="input-group">
 												<div class="input-group-addon">Name</div>
 												<input type='text' name="name" class="form-control" aria-label="Name" />
@@ -70,7 +73,8 @@
 												<div class="input-group-addon">Password</div>
 												<input type='text' name="password" class="form-control" aria-label="Username" />
 											</div>
-											<input type="button" value="Register" onClick="Search.api.register();"/>
+											<input type="submit" value="Register" onClick="$(this).attr('disabled', 'disabled'); Search.api.register(); return false;"/>
+										</form>
 									</fieldset>
 								</div>
 							</div>
