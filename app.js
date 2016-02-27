@@ -177,10 +177,27 @@ app.get("/api/game/info/:game_id", function(req, res)
 	{
 		if (game)
 		{
-			res.json({ Result: "Success", game: game });
+			
+			var result = { game: game, players: [] };
+			
+			db.collection("planets").find({ game: game._id }, { user: 1 }).each(function(err, planet)
+			{
+				if (planet)
+				{
+					result.players.push(planet.user);
+				}
+				else
+				{
+					console.log(result);
+					res.json({ Result: "Success", game: result });
+				}
+			});
 			return false;
 		}
-		res.json({ Result: "Error", Message: "Invalid Id" });
+		else
+		{
+			res.json({ Result: "Error", Message: "Invalid Id" });
+		}
 	});
 });
 
@@ -190,7 +207,7 @@ app.post("/api/game/join", function(req, res)
 	var game = req.body.game;
 	db.collection("planets").insertOne({
 		game: new ObjectId(game),
-		user: new ObjectId(req.user._id),
+		user: { id: new ObjectId(req.user._id), name: req.user.name},
 		html: "<p>A planet run by " + req.user.name + ".</p>",
 		coordinates: { x: 3, y: 2, z: 1 }, // TODO randomize
 		personnel: [],
