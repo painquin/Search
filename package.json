@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Andy Hohorst",
+  "repository": "git@github.com:painquin/Search.git",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.0",
